@@ -1,0 +1,15 @@
+1. Program bez argumentów - wyświetla zawartość pamięci
+2. Program z arg zapisuje argumentu od tyłu oddzielone spacjami do pamięci czyli ./prog arg1 arg2 arg3
+   zapisze do pamięci arg3 arg2 arg1.
+   
+Program bez dodatkowych przełączników ALLOW_CLEANUP oraz DYN_SEG_SIZE zachowa się dokładnie tak,
+jak opisanow w punktach 1 i 2 oraz utworzy obiekt pamięci wspólnej na tyle duży aby pomieścić
+wysztykie możliwe argumenty wywołania.
+
+DYN_SEG_SIZE spowoduje, że za każdym razem gdy nowe wartości będą zapisywane do pamięci,
+ta będzie miała dokładnie taki rozmiar, jaki jest wymagany.
+
+ALLOW_CLEANUP spowoduje, że jeśli podany zostanie jeden argument wywołania o wartości 'cleanup',
+to zostanie zniszczony obiekt pamięci wspólnej oraz semafor kontrolujący dostęp do tego obiektu.
+W przeciwnym wypadku gdy te obiekty IPC staną się zbędne należy je usunąć poleceniem 'ipcrm' lub
+uruchomić ponownie system.

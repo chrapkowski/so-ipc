@@ -1,0 +1,15 @@
+Podejście polegające na tym, że proces rodzica tworzy semafor uruchamia procesy potomne korzystające
+z tego semaforma oraz niszczący semafor na wyjściu. W podejściu tym wykorzystuje się semafory o
+kluczu prywatnym.
+
+Podejście to polega na:
+  1.  Utworzenie semafora i ustawienie jego wartości początkowej.
+  2.  Uruchomienie procesów potomnych
+  3.  Procesy potomne wykonują akcje:
+        - blokowanie semafora,
+        - sekcja krytyczna,
+        - zwalnianie semafora.
+  4.  Oczekiwanie na zakończenie działania wszystkich procesów potomnych.
+  5.  Zniszczenie semaforma.
+
+Więcej szczegółów można znaleść w komentarzach kodu źródłowego.

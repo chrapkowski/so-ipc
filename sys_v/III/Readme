@@ -1,0 +1,27 @@
+1. Program bez argumentów - wyświetla zawartość pamięci
+2. Program z arg zapisuje argumentu od tyłu oddzielone spacjami do pamięci czyli ./prog arg1 arg2 arg3
+   zapisze do pamięci arg3 arg2 arg1.
+   
+Program bez dodatkowych przełączników ALLOW_CLEANUP oraz DYN_SEG_SIZE zachowa się dokładnie tak,
+jak opisanow w punktach 1 i 2 oraz utworzy obiekt pamięci wspólnej na tyle duży aby pomieścić
+wysztykie możliwe argumenty wywołania.
+
+DYN_SEG_SIZE spowoduje, że za każdym razem gdy nowe wartości będą zapisywane do pamięci,
+ta będzie miała dokładnie taki rozmiar, jaki jest wymagany. W tym konkretnym przypadku teoretycznie,
+dlatego że w praktyce dla pamięci wspólnej jest przydzielana jedna lub więcej stron (bloków
+pamięci fizycznej) pamięci wirtualnej, a w rozpatrywanym przypadku LINE_MAX (z limits.h) jest
+zwykle mniejsze od rozmiaru jednej strony.
+
+Np. w 64-bitowym systemie x86_64 GNU/Linux (jądro w wersji 3.0.0-14) strona ma wielkość 4kB
+(polecenie "getconf PAGE_SIZE" lub "getconf PAGE_SIZE"), a LINE_MAX (polecenie "getconf LINE_MAX")
+2 kB.
+
+Można sie pokusić o dość ryzykowny eksperyment, w którym żąda się mniej pamięci niż ma jedna strona
+a później zapisać za obszarem tej pamięci lecz w obszarze tej samej strony) i wówczas okazuje się,
+że wszystko działa poprawnie. Nie mniej jednak polecenie "ipcs" informuje o tym, że obiekt ma
+zażądany rozmiar, a sam fakty korzystania z nieżądanej pamięci wydaje się być wątpliwą praktyką.
+
+ALLOW_CLEANUP spowoduje, że jeśli podany zostanie jeden argument wywołania o wartości 'cleanup',
+to zostanie zniszczony obiekt pamięci wspólnej oraz semafor kontrolujący dostęp do tego obiektu.
+W przeciwnym wypadku gdy te obiekty IPC staną się zbędne należy je usunąć poleceniem 'ipcrm' lub
+uruchomić ponownie system.

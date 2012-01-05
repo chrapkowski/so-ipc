@@ -1,0 +1,16 @@
+Podejście polegające na tym, że proces który jest uruchomiony jako pierwszy tworzy
+semafor (niekoniecznie oznacza to, że jako pierwszy z niego skorzysta), a ostatni
+proces, który skorzystał z semafora niszczy go.
+
+Realizacja:
+  1.  Próba utworzenia semaforma, jeśli się powiedzie semafor jest ustawiany na wartość
+      początkową (określenie tego zabiegu mianem inicjalizacji jest kwestią pojęciowo
+      sporną).
+  2.  Zablokowanie semafora.
+  3.  Wykonanie sekcji krytycznej.
+  3a. Jeśli skompilowano z przełącznikiem AUTO_RM_SEM, sprawdzane jest czy są jakieś
+      procesy oczekujące na zasób, jeśli nie to semafor jest niszczony i program
+      kończy działanie.
+  4.  Zwolnienie semafora.
+
+Więcej szczegółów można znaleść w komentarzach kodu źródłowego.

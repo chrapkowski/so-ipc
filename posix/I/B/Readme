@@ -1,0 +1,3 @@
+Program analogiczny do tego realizowanego za pomocą semaforów Systemu V
+
+UWAGA: Przed wywołaniem programu semafor nie może istnieć, użyj posix_sem_server stop

@@ -1,0 +1,3 @@
+API semaforów systemu POSIX nie dostarcza metody sprawdzenia ile procesów oczekuje na semafor
+więc po zakończeniu działania przez ostatni proces należy samodzielnie usunąć semafor. Można to
+zrobić poprzez system plików lub wykorzystując aplikację posix_server z parametrem stop.

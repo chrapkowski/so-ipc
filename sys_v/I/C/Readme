@@ -1,0 +1,15 @@
+Podejście polegające na wykorzystaniu aplikacji posiłkowej, którą dla uproszczenia nazywamy
+serwerem, która jest uruchamiana z parametrem start lub stop, aby odpowiedni utworzy semafor
+oraz zniszczyć semafor.
+
+Podejście to polega na:
+  1. Uruchomienie serwera z parametrem 'start'
+  
+  2. Uruchomienie dowolnej ilości procesów klientów, które wykonują akcje:
+    - blokowanie semafora,
+    - sekcja krytyczna,
+    - zwalnianie semafora.
+    
+  3. Na koniec należy uruchomić serwer z parametrem 'stop'
+
+Więcej szczegółów można znaleść w komentarzach kodu źródłowego.
