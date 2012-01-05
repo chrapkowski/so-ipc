@@ -68,20 +68,6 @@ int main(int o_argc, const string const* o_argv) {
   exit(EXIT_SUCCESS);
 }
 
-char* getExecPath(const string o_exec) {
-  string _path = get_current_dir_name();
-  assertnz(_path);
-  
-  const string _filename = basename(o_exec);
-  _path = realloc(_path, strlen(_path) + strlen(_filename) + 2);
-  assertnz(_path);
-  
-  strcat(_path, "/");
-  strcat(_path, _filename);
-  
-  return _path;
-}
-
 void printUsage(const string o_exec) {
   printfln(
     "Usage:\n"

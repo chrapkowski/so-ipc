@@ -7,6 +7,7 @@
 #include <sys/stat.h>
 #include <string.h>
 #include <limits.h>
+#include <libgen.h>
 #include <errno.h>
 
 #define cast(x) (x)
